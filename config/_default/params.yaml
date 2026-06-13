@@ -15,13 +15,13 @@ hugoblox:
     # Site name - shown in navbar, footer, copyright, and browser title by default
     name: "Raphael Merz"
     # Legal entity for copyright notices (defaults to name if not set)
-    organization: "Eindhoven University of Technology"
+    organization: ""
     # Schema.org type for structured data
     type: person # person | organization | local_business
     # Short tagline displayed on your site
     tagline: "PhD Candidate at Eindhoven University of Technology"
     # Site meta description for search engines and social sharing
-    description: "Academic website of Raphael Merz, PhD candidate at Eindhoven University of Technology."
+    description: "Personal website of Raphael Merz, PhD candidate at Eindhoven University of Technology."
     # Social accounts (used for meta tags like Twitter Cards)
     social:
       bluesky: "raphaelmerz.bsky.social"
