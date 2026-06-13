@@ -38,9 +38,9 @@ sections:
       title: '📚 My Research'
       subtitle: ''
       text: |-
-        TODO: Describe your research interests and mission here. What topics do you work on? What methods do you use? What are your goals?
+        In my research I broadly investigate how researchers can use theories to predict and interpret effect sizes. My specific PhD projects include (1) how experiments should be analyzed when continous target states are being manipulated, (2) how researchers can explore and theorize about the function forms connecting variables, and (3) how psychological theories could be translated into generative, computational models. 
 
-        Please reach out to collaborate 😃
+        I'm always happy to chat about these (and many other) topics, so please reach out if you like! :)
     design:
       columns: '1'
   - block: collection
