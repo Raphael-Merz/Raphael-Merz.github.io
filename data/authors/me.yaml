@@ -22,12 +22,14 @@ links:
   - icon: at-symbol
     url: 'mailto:r.t.p.merz@tue.nl'
     label: E-mail Me
-  - icon: brands/github
-    url: 'https://github.com/Raphael-Merz'
-  - icon: custom/bluesky # not sure if this will work; should be BlueSky icon
+  - icon: custom/bluesky
     url: https://bsky.app/profile/raphaelmerz.bsky.social
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/raphael-merz-20685b36b/
+  - icon: brands/github
+    url: 'https://github.com/Raphael-Merz'
+  - icon: custom/osf
+    url: https://osf.io/4nb8e/
   - icon: academicons/google-scholar
     url: https://scholar.google.de/citations?user=L84CsecAAAAJ&hl=de
   - icon: academicons/orcid
