@@ -16,9 +16,9 @@ sections:
         text: Download CV
         url: uploads/resume.pdf
       headings:
-        about: ''
-        education: ''
-        interests: ''
+        about: 'About me paragraph'
+        education: 'Education paragraph'
+        interests: 'Interests paragraph'
     design:
       # Use the new Gradient Mesh which automatically adapts to the selected theme colors
       background:
@@ -33,19 +33,19 @@ sections:
       avatar:
         size: medium # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
         shape: circle # Options: circle (default), square, rounded
-  - block: markdown
-    content:
-      title: '📚 My Research'
-      subtitle: ''
-      text: |-
-        In my research I broadly investigate how researchers can use theories to predict and interpret effect sizes. My specific PhD projects include (1) how experiments should be analyzed when continous target states are being manipulated, (2) how researchers can explore and theorize about the function forms connecting variables, and (3) how psychological theories could be translated into generative, computational models. 
+  # - block: markdown
+  #   content:
+  #     title: '📚 My Research'
+  #     subtitle: ''
+  #     text: |-
+  #       In my research I broadly investigate how researchers can use theories to predict and interpret effect sizes. My specific PhD projects include (1) how experiments should be analyzed when continous target states are being manipulated, (2) how researchers can explore and theorize about the function forms connecting variables, and (3) how psychological theories could be translated into generative, computational models. 
 
-        I'm always happy to chat about these (and many other) topics, so please reach out if you like! :)
-    design:
-      columns: '1'
-  - block: collection
-    id: papers
-  #   content: # not relevant for now
+  #       I'm always happy to chat about these (and many other) topics, so please reach out if you like! :)
+  #   design:
+  #     columns: '1'
+  # - block: collection # not relevant for now
+  #   id: papers
+  #   content:
   #     title: Featured Publications
   #     filters:
   #       folders:
@@ -55,15 +55,15 @@ sections:
   #     view: article-grid
   #     columns: 2
   # - block: collection
-    content:
-      title: Recent Publications
-      text: ''
-      filters:
-        folders:
-          - publications
-        exclude_featured: false
-    design:
-      view: citation
+    # content:
+    #   title: Recent Publications
+    #   text: ''
+    #   filters:
+    #     folders:
+    #       - publications
+    #     exclude_featured: false
+    # design:
+    #   view: citation
   # - block: collection
   #   id: talks
   #   content:
