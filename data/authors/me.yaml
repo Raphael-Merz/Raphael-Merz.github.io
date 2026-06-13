@@ -10,54 +10,61 @@ name:
   pronouns: he/him
 postnominals: []
 status:
-  icon: "🧠"
+  icon: "📈"
 role: PhD Candidate
 bio: |
-  Raphael Merz is a PhD candidate at Eindhoven University of Technology.
-  He holds a M.Sc. in Psychology (Cognitive Neuroscience) from Ruhr University Bochum.
-
+  I'm working on theory-informed interpretations of effect sizes and am a board member at the Platform for Young Meta-Scientists (PYMS).
 affiliations:
   - name: Eindhoven University of Technology
-    url: https://www.tue.nl/
+    url: https://research.tue.nl/en/persons/raphael-merz/
 
 links:
   - icon: at-symbol
-    url: 'mailto:your.email@example.com'  # TODO: Replace with your email
+    url: 'mailto:r.t.p.merz@tue.nl'
     label: E-mail Me
   - icon: brands/github
     url: 'https://github.com/Raphael-Merz'
-  # TODO: Add your social links below (uncomment and fill in)
-  # - icon: brands/x
-  #   url: https://x.com/your-handle
-  # - icon: brands/linkedin
-  #   url: https://www.linkedin.com/in/your-profile/
-  # - icon: academicons/google-scholar
-  #   url: https://scholar.google.com/citations?user=your-id
-  # - icon: academicons/orcid
-  #   url: https://orcid.org/your-orcid
+  - icon: brands/bsky
+    url: https://bsky.app/profile/raphaelmerz.bsky.social
+  - icon: brands/linkedin
+    url: https://www.linkedin.com/in/raphael-merz-20685b36b/
+  - icon: academicons/google-scholar
+    url: https://scholar.google.de/citations?user=L84CsecAAAAJ&hl=de
+  - icon: academicons/orcid
+    url: https://orcid.org/0000-0002-9474-3379
 
 interests:
-  - 'TODO: Add your research interest 1'
-  - 'TODO: Add your research interest 2'
-  - 'TODO: Add your research interest 3'
+  - Meta-Science
+  - Open-Science
+  - NHST
+  - Effect Sizes
+  - Theories
 
 education:
-  - degree: PhD (in progress)
+  - degree: PhD Meta-Science (in progress)
     institution: Eindhoven University of Technology
     start: 2025-10-01
     summary: |
-      TODO: Add a short description of your PhD research topic.
+      My PhD is part of Daniël Lakens' '[Interpretable Effect Sizes for Psychological Science](https://doi.org/10.61686/UOJCN75090)' project.
   - degree: M.Sc. Psychology (Cognitive Neuroscience)
     institution: Ruhr University Bochum
     start: 2023-10-01
     end: 2025-09-30
+    button:
+      text: Download Master's thesis
+      url: https://github.com/Raphael-Merz/nonsig-master-thesis/blob/main/thesis/final_thesis.pdf
+      icon: hero/arrow-down-tray
   - degree: B.Sc. Psychology
     institution: Ruhr University Bochum
     start: 2019-10-01
     end: 2023-09-30
+    button:
+      text: Download Bachelor's thesis
+      url: https://osf.io/d9b32/files/dyhvg
+      icon: hero/arrow-down-tray
 
 experience:
-  - role: 'TODO: Your job title'
+  - role: 'TODO: Your job experience'
     org: 'TODO: Organization name'
     start: 2024-01-01
     end: 2025-01-01
@@ -84,12 +91,12 @@ skills:
         level: 3
 
 languages:
-  - name: 'TODO: Language 1'
+  - name: German
     level: 5
     label: Native
-  - name: 'TODO: Language 2'
-    level: 3
-    label: Intermediate
+  - name: English
+    level: 4
+    label: Fluent
 
 awards:
   - title: 'TODO: Award title'
