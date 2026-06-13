@@ -1,6 +1,6 @@
 ---
 title: Blog
-view: landing
+type: landing
 
 # Page sections
 sections:
