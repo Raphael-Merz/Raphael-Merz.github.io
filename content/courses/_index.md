@@ -1,4 +1,4 @@
-<!-- --- # don't want courses page for now
+--- # don't want courses page for now
 title: Courses
 summary: My courses
 type: landing
@@ -25,4 +25,4 @@ sections:
       show_date: false
       show_read_more: false
       columns: 1
---- -->
+---
