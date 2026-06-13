@@ -1,7 +1,7 @@
 ---
 # Leave the homepage title empty to use the site title
-title: ''
-summary: ''
+title: 'Raphael Merz'
+summary: 'Personal website of Raphael Merz'
 date: 2022-10-24
 type: landing
 
@@ -45,16 +45,16 @@ sections:
       columns: '1'
   - block: collection
     id: papers
-    content:
-      title: Featured Publications
-      filters:
-        folders:
-          - publications
-        featured_only: true
-    design:
-      view: article-grid
-      columns: 2
-  - block: collection
+  #   content: # not relevant for now
+  #     title: Featured Publications
+  #     filters:
+  #       folders:
+  #         - publications
+  #       featured_only: true
+  #   design:
+  #     view: article-grid
+  #     columns: 2
+  # - block: collection
     content:
       title: Recent Publications
       text: ''

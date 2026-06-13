@@ -1,4 +1,4 @@
----
+<!-- --- # don't want events page for now
 title: Recent & Upcoming Talks
 cms_exclude: true
 #url: talk
@@ -10,4 +10,4 @@ view: card
 image:
   caption: ''
   filename: ''
----
+--- -->
