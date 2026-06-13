@@ -24,7 +24,7 @@ links:
     label: E-mail Me
   - icon: brands/github
     url: 'https://github.com/Raphael-Merz'
-  - icon: assets/media/icons/costume/bluesky # not sure if this will work; should be BlueSky icon
+  - icon: custom/bluesky
     url: https://bsky.app/profile/raphaelmerz.bsky.social
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/raphael-merz-20685b36b/
