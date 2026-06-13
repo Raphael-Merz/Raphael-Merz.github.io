@@ -23,8 +23,8 @@ main:
     url: projects/
     weight: 30
   - name: CV
-    url: static/uploads/resume.pdf
-    weight: 30
+    url: /uploads/resume.pdf
+    weight: 15
   # - name: Courses
   #   url: courses/
   #   weight: 40
