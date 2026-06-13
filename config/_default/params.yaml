@@ -24,7 +24,7 @@ hugoblox:
     description: "Academic website of Raphael Merz, PhD candidate at Eindhoven University of Technology."
     # Social accounts (used for meta tags like Twitter Cards)
     social:
-      twitter: "" # TODO: Add your Twitter/X handle (without @)
+      bluesky: "raphaelmerz.bsky.social" # TODO: Add your Twitter/X handle (without @)
 
   # ────────────────────────────────────────────────────────────────────────────
   # THEME
