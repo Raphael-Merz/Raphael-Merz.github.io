@@ -7,7 +7,7 @@ sections:
   - block: collection
     content:
       title: Blog posts
-      text: A place where I write about things I'm learning about and things I'm working on.
+      text: A place where I re-explain some of the things I've learned to myself (and possibly others).
       filters:
         folders:
           - blog
