@@ -9,6 +9,7 @@ tags:
   - Jupyter
   - Open Science
   - Tutorials
+draft: true 
 cover:
   # image: cover.jpg  # Auto-detected from cover image in this folder
   icon:

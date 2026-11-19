@@ -9,6 +9,7 @@ tags:
   - Hugo
   - HugoBlox Kit
   - Markdown
+draft: true 
 image:
   caption: 'Embed rich media such as videos and LaTeX math'
 cover:

@@ -33,6 +33,8 @@ tags:
   - Hugo Blox
   - Markdown
 
+draft: true 
+
 content_meta:
   trending: true
 ---
