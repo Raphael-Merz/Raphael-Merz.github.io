@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Editing Guide</title>
+<style>
+  :root {
+    --bg: #fbfbf9;
+    --surface: #ffffff;
+    --text: #1d2321;
+    --muted: #5d6763;
+    --border: #e1e4e1;
+    --accent: #2f7a4a;
+    --accent-soft: #e6f3ea;
+    --code-bg: #f2f4f2;
+    --warn-bg: #fff6e0;
+    --warn-border: #e8c46a;
+    --note-bg: #eaf2fb;
+    --note-border: #8db4df;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151917;
+      --surface: #1c211f;
+      --text: #e4e8e5;
+      --muted: #9aa49f;
+      --border: #2f3633;
+      --accent: #7ccb98;
+      --accent-soft: #213229;
+      --code-bg: #232a27;
+      --warn-bg: #352d17;
+      --warn-border: #8a7230;
+      --note-bg: #1c2836;
+      --note-border: #3f6590;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151917; --surface: #1c211f; --text: #e4e8e5; --muted: #9aa49f;
+    --border: #2f3633; --accent: #7ccb98; --accent-soft: #213229; --code-bg: #232a27;
+    --warn-bg: #352d17; --warn-border: #8a7230; --note-bg: #1c2836; --note-border: #3f6590;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { display: grid; grid-template-columns: 240px minmax(0, 1fr); max-width: 1180px; margin: 0 auto; gap: 40px; padding: 0 24px; }
+  nav.toc { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; padding: 32px 0; font-size: 14px; }
+  nav.toc strong { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  nav.toc a { display: block; color: var(--text); text-decoration: none; padding: 4px 10px; border-left: 2px solid var(--border); }
+  nav.toc a:hover { border-left-color: var(--accent); color: var(--accent); }
+  nav.toc a.sub { padding-left: 22px; color: var(--muted); font-size: 13px; }
+  main { padding: 32px 0 80px; min-width: 0; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 8px; }
+  .lede { color: var(--muted); font-size: 1.05rem; margin: 0 0 32px; max-width: 70ch; }
+  h2 { font-size: 1.45rem; margin: 56px 0 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  h3 { font-size: 1.1rem; margin: 32px 0 8px; }
+  p, li { max-width: 75ch; }
+  a { color: var(--accent); }
+  code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .88em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; overflow-x: auto; font-size: 13.5px; line-height: 1.5; }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  .c { color: var(--muted); }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; margin: 12px 0; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  td:first-child { white-space: nowrap; }
+  .table-scroll { overflow-x: auto; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+  .edit { background: var(--accent-soft); color: var(--accent); }
+  .rare { background: var(--code-bg); color: var(--muted); }
+  .leave { background: var(--warn-bg); color: var(--text); }
+  .box { border-radius: 8px; padding: 12px 16px; margin: 16px 0; border: 1px solid; }
+  .box p { margin: 4px 0; }
+  .warn { background: var(--warn-bg); border-color: var(--warn-border); }
+  .note { background: var(--note-bg); border-color: var(--note-border); }
+  .where { display: inline-block; font-family: ui-monospace, Consolas, monospace; font-size: 13px; background: var(--accent-soft); color: var(--accent); padding: 3px 10px; border-radius: 6px; margin-bottom: 6px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 16px 0; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .card b { display: block; margin-bottom: 4px; }
+  .card code { font-size: 12.5px; }
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0; font-size: 14px; }
+  .flow span { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; }
+  .flow i { font-style: normal; color: var(--muted); }
+  ol.steps li { margin-bottom: 6px; }
+  @media (max-width: 860px) {
+    .wrap { grid-template-columns: 1fr; padding: 0 16px; gap: 0; }
+    nav.toc { position: static; max-height: none; padding: 24px 0 0; }
+    td:first-child { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc">
+  <strong>Contents</strong>
+  <a href="#big-picture">1. How the site works</a>
+  <a href="#repo-map">2. What's in the repo</a>
+  <a href="#basics">3. Markdown, YAML &amp; front matter</a>
+  <a href="#recipes">4. Where to edit what</a>
+  <a class="sub" href="#about">About / bio / links</a>
+  <a class="sub" href="#photo">Profile photo</a>
+  <a class="sub" href="#homepage">Homepage layout</a>
+  <a class="sub" href="#menu">Navigation menu</a>
+  <a class="sub" href="#blog">Blog posts</a>
+  <a class="sub" href="#projects">Projects</a>
+  <a class="sub" href="#publications">Publications</a>
+  <a class="sub" href="#cv">CV PDF &amp; other files</a>
+  <a class="sub" href="#other-sections">Talks, courses, slides, experience</a>
+  <a href="#look">5. Global look &amp; settings</a>
+  <a href="#template-leftovers">6. Template leftovers</a>
+  <a href="#workflow">7. Publishing &amp; previewing</a>
+  <a href="#troubleshooting">8. When something breaks</a>
+</nav>
+
+<main>
+<h1>Editing your website</h1>
+<p class="lede">A walkthrough of how this repository (<code>Raphael-Merz.github.io</code>) is put together, which file controls which part of the site, and how to make the usual changes. This file sits in the repo root, which Hugo doesn't publish, so it won't show up on the live site.</p>
+
+<!-- ============================================================ -->
+<h2 id="big-picture">1. How the site works</h2>
+<p>The site is built with <b>Hugo</b>, a static site generator, using the <b>HugoBlox "Academic CV"</b> template. You never write HTML. You edit:</p>
+<ul>
+  <li><b>YAML files</b> for settings and structured data (your name, colors, menu items, education list, …)</li>
+  <li><b>Markdown files</b> for pages (blog posts, project pages, the homepage layout)</li>
+</ul>
+<p>The template's actual code (page layouts, CSS, the "blocks" the pages are built from) is <b>not in your repo</b>. It's a Hugo module that gets downloaded at build time (see <code>go.mod</code> and <code>config/_default/module.yaml</code>). So you <em>configure</em> the template but don't edit its code. That's why there's no big <code>themes/</code> or <code>layouts/</code> folder.</p>
+
+<p>Publishing works like this:</p>
+<div class="flow">
+  <span>Edit files</span><i>→</i>
+  <span>Commit &amp; push to <code>main</code></span><i>→</i>
+  <span>GitHub Action builds the site with Hugo</span><i>→</i>
+  <span>Live at <code>raphael-merz.github.io</code> (a few minutes)</span>
+</div>
+<p>The workflow that does this is <code>.github/workflows/deploy.yml</code>. You can watch it under the <b>Actions</b> tab of the repo on GitHub.</p>
+
+<!-- ============================================================ -->
+<h2 id="repo-map">2. What's in the repo</h2>
+<p><span class="tag edit">edit</span> = files you'll actually work in. <span class="tag rare">rarely</span> = settings you might touch once. <span class="tag leave">leave</span> = build plumbing you can ignore.</p>
+
+<div class="table-scroll">
+<table>
+<tr><th>Path</th><th></th><th>What it's for</th></tr>
+<tr><td><code>data/authors/me.yaml</code></td><td><span class="tag edit">edit</span></td><td>Your profile: name, role, <b>bio ("About me")</b>, affiliation, social links, interests, education, experience, skills, languages, awards. The homepage and the Experience page read from here.</td></tr>
+<tr><td><code>config/_default/params.yaml</code></td><td><span class="tag edit">edit</span></td><td><b>Global site settings</b>: site name, tagline, colors, theme, fonts, header/footer options, copyright, search, comments, analytics.</td></tr>
+<tr><td><code>config/_default/menus.yaml</code></td><td><span class="tag edit">edit</span></td><td>The navigation bar at the top (Bio, CV, Projects, Blog).</td></tr>
+<tr><td><code>content/</code></td><td><span class="tag edit">edit</span></td><td>All pages. Each subfolder is a section of the site (see below).</td></tr>
+<tr><td><code>content/_index.md</code></td><td><span class="tag edit">edit</span></td><td>The <b>homepage layout</b>: which blocks appear and in what order.</td></tr>
+<tr><td><code>content/blog/</code></td><td><span class="tag edit">edit</span></td><td>Blog list page (<code>_index.md</code>) + one folder per post.</td></tr>
+<tr><td><code>content/projects/</code></td><td><span class="tag edit">edit</span></td><td>Projects list page (<code>_index.md</code>) + one folder per project.</td></tr>
+<tr><td><code>content/publications/</code></td><td><span class="tag rare">later</span></td><td>One folder per paper. Currently three template examples.</td></tr>
+<tr><td><code>content/events/</code>, <code>courses/</code>, <code>slides/</code>, <code>experience.md</code></td><td><span class="tag rare">later</span></td><td>Talks, courses, slide decks, and a CV-style experience page. All still template content (see <a href="#template-leftovers">§6</a>).</td></tr>
+<tr><td><code>content/authors/_index.md</code></td><td><span class="tag leave">leave</span></td><td>Switches off separate author profile pages. Your profile data lives in <code>data/authors/</code> instead.</td></tr>
+<tr><td><code>assets/media/</code></td><td><span class="tag edit">edit</span></td><td>Images Hugo processes: <code>authors/me.png</code> (your photo), <code>icon.svg</code> (site icon), <code>slides-logo.svg</code>, and <code>icons/custom/</code> (your own SVG icons, e.g. Bluesky and OSF). <code>website_icon.pptx</code> in there is just a source file and the site doesn't use it.</td></tr>
+<tr><td><code>static/</code></td><td><span class="tag edit">edit</span></td><td>Files copied as-is to the site. <code>static/uploads/resume.pdf</code> is served at <code>/uploads/resume.pdf</code> (the CV menu link).</td></tr>
+<tr><td><code>config/_default/hugo.yaml</code></td><td><span class="tag rare">rarely</span></td><td>Technical Hugo settings, including <code>baseURL</code> (your site address).</td></tr>
+<tr><td><code>config/_default/languages.yaml</code></td><td><span class="tag rare">rarely</span></td><td>Only needed for a multilingual site.</td></tr>
+<tr><td><code>config/_default/module.yaml</code></td><td><span class="tag leave">leave</span></td><td>Which HugoBlox modules get loaded.</td></tr>
+<tr><td><code>config/_default/params - Kopie.yaml</code></td><td><span class="tag leave">leftover</span></td><td>A copy you made of an older params file. Hugo doesn't read it as your site settings, so <b>edits here do nothing</b>. You can delete it.</td></tr>
+<tr><td><code>layouts/</code></td><td><span class="tag leave">leave</span></td><td>Small template overrides. Currently just a hook that loads the GitHub "Star" button script for the demo card.</td></tr>
+<tr><td><code>hugoblox.yaml</code></td><td><span class="tag rare">rarely</span></td><td>Hugo version used for builds, and where to deploy (<code>github-pages</code>).</td></tr>
+<tr><td><code>.github/workflows/</code></td><td><span class="tag leave">leave</span></td><td>Automation. <code>deploy.yml</code> + <code>build.yml</code> publish the site. <code>import-publications.yml</code> turns a <code>publications.bib</code> into pages (<a href="#publications">§4</a>). <code>upgrade.yml</code> opens a PR every Monday when the template has updates.</td></tr>
+<tr><td><code>go.mod</code>, <code>package.json</code>, <code>pnpm-lock.yaml</code>, <code>.npmrc</code></td><td><span class="tag leave">leave</span></td><td>Dependency versions for the build.</td></tr>
+<tr><td><code>netlify.toml</code>, <code>.devcontainer/</code>, <code>.vscode/</code></td><td><span class="tag leave">leave</span></td><td>Netlify config (unused, since you deploy to GitHub Pages), a Codespaces setup, and a VS Code extension suggestion.</td></tr>
+<tr><td><code>README.md</code></td><td><span class="tag leave">leave</span></td><td>The template's README. It shows on the GitHub repo page but not on your website. You can replace it with your own text.</td></tr>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="basics">3. Markdown, YAML &amp; front matter (the 2-minute version)</h2>
+<p>Every page in <code>content/</code> is a Markdown file that starts with a <b>front matter</b> block between <code>---</code> lines. The front matter is YAML and holds the page's settings. Everything below it is the page text in Markdown.</p>
+<pre><code>---
+title: My first post          <span class="c"># front matter (YAML): settings</span>
+date: 2026-11-17
+tags: [Effect sizes]
+---
+
+Here is the **body** of the page, written in Markdown.   <span class="c">← content</span>
+</code></pre>
+
+<h3>Page bundles</h3>
+<p>Most pages are a <b>folder</b> containing an <code>index.md</code> plus any images or files that belong to it. The folder name becomes the URL:</p>
+<pre><code>content/blog/my-first-post/
+├── index.md        <span class="c">→ raphael-merz.github.io/blog/my-first-post/</span>
+├── featured.jpg    <span class="c">→ thumbnail on the blog list + header image</span>
+└── figure1.png     <span class="c">→ use in the text as ![caption](figure1.png)</span>
+</code></pre>
+<p>A file named <code>_index.md</code> (with underscore) is the <b>list page</b> for a section, e.g. <code>content/blog/_index.md</code> is the page at <code>/blog/</code> that shows all posts.</p>
+
+<h3>Landing pages and blocks</h3>
+<p>Pages with <code>type: landing</code> (the homepage, the Blog page, the Projects page) don't have body text. They have a list of <code>sections:</code>, and each section is a <b>block</b> such as a biography, a markdown text box, or a grid of posts. You rearrange a page by reordering, adding, or commenting out blocks. The full block catalogue is at <a href="https://hugoblox.com/blocks/">hugoblox.com/blocks</a>.</p>
+
+<h3>YAML gotchas</h3>
+<ul>
+  <li><b>Indentation matters</b> and must be spaces, never tabs. Most broken builds come from a misaligned line.</li>
+  <li>Put text containing <code>:</code> or <code>#</code> in quotes: <code>title: 'Effect sizes: a primer'</code>.</li>
+  <li>For multi-line text use <code>|</code> and indent the following lines (as in your <code>bio:</code>).</li>
+  <li><code>#</code> starts a comment. That's how blocks and menu items are currently switched off.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="recipes">4. Where to edit what</h2>
+
+<h3 id="about">About text, name, role, links, interests, education</h3>
+<div class="where">data/authors/me.yaml</div>
+<p>The "About me" box on the homepage is built from this file, not from <code>content/_index.md</code>. The relevant fields:</p>
+<pre><code>name:
+  display: Raphael Merz          <span class="c"># big name on the homepage</span>
+role: PhD Candidate              <span class="c"># line under the name</span>
+status:
+  icon: "📈"                     <span class="c"># little emoji badge on the photo</span>
+bio: |                           <span class="c"># ← the "About me" text; Markdown links work</span>
+  Hi, I'm Raphael, a PhD researcher ...
+
+  Second paragraph after a blank line.
+affiliations:
+  - name: Eindhoven University of Technology
+    url: https://research.tue.nl/...
+links:                           <span class="c"># the icon row under your name</span>
+  - icon: brands/github
+    url: https://github.com/Raphael-Merz
+interests:                       <span class="c"># "Interests" list</span>
+  - Meta-Science
+education:                       <span class="c"># "Education" list; newest first</span>
+  - degree: PhD Meta-Science (in progress)
+    institution: Eindhoven University of Technology
+    start: 2025-10-01
+    summary: |
+      Optional text, Markdown allowed.
+    button:                      <span class="c"># optional button under the entry</span>
+      text: Download thesis
+      url: https://...
+      icon: hero/arrow-down-tray
+</code></pre>
+<p><b>Link icons</b> come from a few icon sets, written as <code>set/name</code>:</p>
+<ul>
+  <li><code>brands/…</code>: logos like <code>brands/github</code>, <code>brands/linkedin</code></li>
+  <li><code>academicons/…</code>: academic logos like <code>academicons/orcid</code>, <code>academicons/google-scholar</code></li>
+  <li>no prefix or <code>hero/…</code>: general icons like <code>at-symbol</code>, <code>hero/arrow-down-tray</code></li>
+  <li><code>custom/…</code>: your own SVGs from <code>assets/media/icons/custom/</code>. <code>custom/bluesky</code> uses <code>bluesky.svg</code>. To add one, drop an SVG in that folder and reference it by filename without <code>.svg</code>.</li>
+</ul>
+<p>The section headings on the homepage ("About me", "Education", "Interests") are set in <code>content/_index.md</code> under <code>headings:</code>.</p>
+
+<h3 id="photo">Profile photo</h3>
+<div class="where">assets/media/authors/me.png</div>
+<p>Replace this file with a new image of the <b>same name</b>. The filename matches the author slug <code>me</code>. Use a roughly square image. Hugo resizes it, so the full-resolution file is fine. Size and shape (circle/square/rounded) are set in <code>content/_index.md</code> under <code>design: avatar:</code>.</p>
+
+<h3 id="homepage">Homepage layout</h3>
+<div class="where">content/_index.md</div>
+<p>Right now the homepage has one active block, <code>resume-biography-3</code> (photo + name + bio + interests + education). Things you can change there:</p>
+<ul>
+  <li><code>headings:</code> renames the "About me" / "Education" / "Interests" titles.</li>
+  <li><code>design: background: gradient_mesh: enable:</code> turns the colored gradient background on or off.</li>
+  <li><code>design: name: size:</code> and <code>design: avatar: size/shape:</code> control the name and photo size.</li>
+  <li><code>button:</code> (commented out) adds a "Download CV" button under the bio.</li>
+</ul>
+<p>Below it are <b>commented-out blocks</b> you kept from the template: a "📚 My Research" markdown block, "Featured Publications", "Recent Publications", and "Recent &amp; Upcoming Talks". To enable one, remove the <code>#</code> from each of its lines while keeping the indentation consistent with the active block above (each block starts with <code>  - block:</code>, two spaces then a dash).</p>
+<div class="box warn"><p><b>Watch out:</b> in the "Recent Publications" block (around lines 57–66), the <code>content:</code>/<code>design:</code> lines are commented with a different indentation (<code>    # content:</code>) than the <code># - block: collection</code> line above them. When you uncomment it, check that <code>content:</code> and <code>design:</code> line up with those of the bio block, or the build fails.</p></div>
+<p>The last block, <code>cta-card</code> ("Build your own academic website like this"), has <code>demo: true</code>. It only shows on HugoBlox's own demo site, not on yours, so you can leave it or delete it.</p>
+<p>If you give a block an <code>id:</code> (e.g. <code>id: papers</code>), you can link to it from the menu with <code>url: /#papers</code>.</p>
+
+<h3 id="menu">Navigation menu</h3>
+<div class="where">config/_default/menus.yaml</div>
+<pre><code>main:
+  - name: Bio
+    url: /
+    weight: 10        <span class="c"># lower weight = further left</span>
+  - name: CV
+    url: /uploads/resume.pdf
+    weight: 15
+  - name: Projects
+    url: projects/
+    weight: 30
+  - name: Blog
+    url: /blog/
+    weight: 40
+</code></pre>
+<p>Add an item by copying a three-line entry, remove one by commenting it out. External links work too (<code>url: https://osf.io/...</code>). Header behavior (sticky, alignment, search, dark-mode toggle) is in <code>params.yaml</code> → <code>header:</code> (see <a href="#look">§5</a>).</p>
+<div class="box note"><p>Removing a menu item only hides the link. The page itself still gets built and stays reachable by URL and by the site search. See <a href="#template-leftovers">§6</a> for how to actually unpublish something.</p></div>
+
+<h3 id="blog">Blog: list page and new posts</h3>
+<div class="where">content/blog/_index.md</div>
+<p>The <code>/blog/</code> page. Change the title, the intro text (<code>text:</code>, already personalised), and the grid design (<code>columns</code>, <code>show_date</code>, <code>show_read_time</code>, …).</p>
+
+<div class="where">content/blog/&lt;post-name&gt;/index.md</div>
+<p><b>To write a new post:</b></p>
+<ol class="steps">
+  <li>Create a folder in <code>content/blog/</code> with a short, URL-friendly name, e.g. <code>content/blog/equivalence-tests/</code>.</li>
+  <li>Inside it, create <code>index.md</code> with front matter like this:
+<pre><code>---
+title: What equivalence tests can and can't tell you
+summary: One or two sentences shown on the blog overview card.
+date: 2026-11-17
+authors:
+  - me
+tags:
+  - Effect sizes
+  - Statistics
+draft: true          <span class="c"># remove or set false when ready to publish</span>
+image:
+  caption: ''        <span class="c"># caption for featured.jpg, optional</span>
+---
+
+Your text in Markdown. Use ## for section headings.
+
+![Figure caption](figure1.png)
+</code></pre></li>
+  <li>Optionally add <code>featured.jpg</code> (or <code>.png</code>) to the folder. It becomes the card image and the post header.</li>
+  <li>Commit and push. Posts appear newest-first by <code>date</code>.</li>
+</ol>
+<p>The template posts also use an optional <code>cover:</code> block for a full-width banner image from a URL. Copy it from <code>content/blog/get-started/index.md</code> if you want that look. Easiest start: copy one of the existing template post folders, rename it, and replace the text.</p>
+<p>The template posts double as a <b>formatting reference</b>: callout boxes (<code>&gt; [!NOTE]</code>), Mermaid diagrams, mind maps and to-do lists (<code>project-management</code>), charts and embeds (<code>data-visualization</code>), audio (<code>teach-courses</code>), and Jupyter notebooks (<code>notebook-onboarding</code>). Look at how they do it before deleting them.</p>
+
+<h3 id="projects">Projects</h3>
+<div class="where">content/projects/_index.md</div>
+<p>The <code>/projects/</code> overview page. The <code>title:</code> ("Selected Projects") and <code>text:</code> ("I enjoy making things…") are still the template's wording. The grid is 3 columns without dates. Change those under <code>design:</code>.</p>
+<div class="where">content/projects/&lt;project-name&gt;/index.md</div>
+<p>Same pattern as blog posts. A project page looks like this (based on the template's <code>pandas</code>/<code>pytorch</code>/<code>scikit</code> examples):</p>
+<pre><code>---
+title: Interpretable Effect Sizes
+summary: Short description for the overview card.
+date: 2025-10-01
+links:                          <span class="c"># buttons on the project page</span>
+  - type: site
+    url: https://doi.org/10.61686/UOJCN75090
+  - type: code
+    url: https://github.com/...
+tags:
+  - Effect sizes
+---
+
+Longer description of the project.
+
+&lt;!--more--&gt;   <span class="c"># everything above this line is used as the preview text</span>
+</code></pre>
+<p>Put a <code>featured.png</code>/<code>.jpg</code> in the folder for the card thumbnail. Delete the three template project folders when you have your own.</p>
+
+<h3 id="publications">Publications</h3>
+<p>Not shown in the menu or on the homepage right now, but the template supports two ways to add papers:</p>
+<ol>
+  <li><b>By hand:</b> one folder per paper in <code>content/publications/</code>. Copy <code>journal-article/</code> (or <code>preprint/</code>, <code>conference-paper/</code>) and edit the front matter: <code>title</code>, <code>authors</code> (use <code>me</code> for yourself), <code>date</code>, <code>publication_types</code>, <code>publication: name</code>, <code>abstract</code>, <code>links</code> (pdf, code, dataset, …). Add a <code>cite.bib</code> to power the "Cite" button.</li>
+  <li><b>From BibTeX (automatic):</b> put a file called <code>publications.bib</code> in the <b>repo root</b> and push. The <code>import-publications.yml</code> workflow converts it into publication folders and opens a <b>pull request</b> that you review and merge. For this to work, GitHub must allow Actions to create PRs: repo <i>Settings → Actions → General → Workflow permissions →</i> tick "Allow GitHub Actions to create and approve pull requests".</li>
+</ol>
+<p>To show them on the site, uncomment the publications blocks in <code>content/_index.md</code> and/or add a menu item (<code>url: /publications/</code> or <code>/#papers</code>). Set <code>featured: true</code> in a paper's front matter to include it in "Featured Publications".</p>
+
+<h3 id="cv">CV PDF and other downloadable files</h3>
+<div class="where">static/uploads/resume.pdf</div>
+<p>The "CV" menu item links straight to this file. Replace it with your own CV under the same name, or rename it and update the URL in <code>menus.yaml</code>. Anything else you put in <code>static/</code> is published at the same path. <code>static/uploads/slides.pdf</code> → <code>/uploads/slides.pdf</code>.</p>
+
+<h3 id="other-sections">Talks, courses, slides, experience page</h3>
+<ul>
+  <li><b>Talks</b>: <code>content/events/</code>, one folder per talk (see <code>example/index.md</code> for the fields: <code>event_name</code>, <code>location</code>, <code>event_start</code>, <code>links</code>, …).</li>
+  <li><b>Slides</b>: <code>content/slides/</code>. Markdown slide decks shown with reveal.js. <code>example/index.md</code> documents the options.</li>
+  <li><b>Courses</b>: <code>content/courses/</code>. The <code>hugo-blox/</code> folder is a documentation-style example course.</li>
+  <li><b>Experience</b>: <code>content/experience.md</code> is a page at <code>/experience/</code> that displays the <code>experience</code>, <code>skills</code>, <code>awards</code> and <code>languages</code> lists from <code>data/authors/me.yaml</code>. Those lists still contain <code>TODO</code> placeholders. Fill them in (or remove them) before linking the page; the menu entry for it is already there, commented out.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="look">5. Global look &amp; settings</h2>
+<div class="where">config/_default/params.yaml</div>
+<p>Everything site-wide lives under the <code>hugoblox:</code> key in this file. The file is well commented. These are the parts you're most likely to touch:</p>
+
+<h3>Identity</h3>
+<pre><code>identity:
+  name: "Raphael Merz"          <span class="c"># navbar, footer, browser tab title</span>
+  tagline: "PhD Candidate at Eindhoven University of Technology"
+  description: "..."            <span class="c"># shown by search engines / link previews</span>
+  social:
+    bluesky: "raphaelmerz.bsky.social"
+</code></pre>
+
+<h3>Colors and theme</h3>
+<pre><code>theme:
+  mode: light          <span class="c"># light | dark | system (follow visitor's OS)</span>
+  pack: minimal        <span class="c"># the base color theme</span>
+  colors:
+    primary: "#D9F2D0" <span class="c"># accent color: hex code or a Tailwind name like "emerald"</span>
+    secondary: ""
+    neutral: ""        <span class="c"># tint of the grays</span>
+  colors_light: {}     <span class="c"># optional overrides for light mode only</span>
+  colors_dark: {}      <span class="c"># optional overrides for dark mode only</span>
+  surfaces:            <span class="c"># optional: background / header / footer colors</span>
+    background: ""
+    header: { background: "", foreground: "" }
+</code></pre>
+<ul>
+  <li><b>Theme packs</b> available in the template: <code>default</code>, <code>minimal</code>, <code>contrast</code>, <code>coffee</code>, <code>cupcake</code>, <code>dracula</code>, <code>marine</code>, <code>matcha</code>, <code>retro</code>, <code>solar</code>, <code>synthwave</code>. You can also mix packs: <code>pack: { light: "minimal", dark: "dracula" }</code>.</li>
+  <li><b>Primary color</b> is used for links, buttons and accents. Tailwind color names (<code>green</code>, <code>emerald</code>, <code>teal</code>, <code>indigo</code>, …) give you a whole range of shades automatically. Your current <code>#D9F2D0</code> is a very pale green, so links and buttons in that color may be hard to read on a white background. If that bothers you, try a darker hex or a name like <code>"green"</code>.</li>
+  <li><code>mode: light</code> sets the default, but <code>header: theme_toggle: true</code> still lets visitors switch to dark mode. Set it to <code>false</code> to lock the mode.</li>
+</ul>
+
+<h3>Fonts and shapes</h3>
+<pre><code>typography:
+  pack: "academic"     <span class="c"># academic | developer | editorial | geometric | humanist | modern | system</span>
+layout:
+  radius: "md"         <span class="c"># corner rounding: none | sm | md | lg | full</span>
+  spacing: "spacious"  <span class="c"># compact | comfortable | spacious</span>
+  avatar_shape: circle <span class="c"># circle | square | rounded</span>
+</code></pre>
+
+<h3>Header, footer, copyright</h3>
+<div class="cards">
+  <div class="card"><b>header:</b><code>style</code> (navbar / navbar-simple / minimal), <code>sticky</code>, <code>align</code>, <code>search</code>, <code>theme_toggle</code>, <code>theme_picker</code>, <code>language_switcher</code>, and an optional call-to-action button (<code>cta</code>).</div>
+  <div class="card"><b>footer:</b><code>style</code> (minimal / columns / centered), custom <code>text</code> (HTML allowed), <code>language_switcher</code>.</div>
+  <div class="card"><b>copyright:</b>The notice text (<code>{year}</code>, <code>{name}</code>, <code>{license}</code> placeholders) and which Creative Commons license applies to your content.</div>
+</div>
+
+<h3>Other switches in the same file</h3>
+<div class="table-scroll">
+<table>
+<tr><th>Key</th><th>What it does</th></tr>
+<tr><td><code>content.math.enable</code></td><td>Turn on LaTeX math rendering (<code>$...$</code>). Currently off.</td></tr>
+<tr><td><code>content.toc</code>, <code>reading_time</code></td><td>Table of contents and "x min read" on posts.</td></tr>
+<tr><td><code>content.citations.style</code></td><td>Citation style for publications (apa, mla, chicago, ieee).</td></tr>
+<tr><td><code>search.enable</code></td><td>Site search (the magnifier in the header).</td></tr>
+<tr><td><code>comments</code></td><td>Comments under posts via giscus or Disqus. Currently off.</td></tr>
+<tr><td><code>analytics</code></td><td>Visitor statistics (Google Analytics, Plausible, …). All empty.</td></tr>
+<tr><td><code>repository</code></td><td>"Edit this page on GitHub" links. Needs <code>enable: true</code> and your repo URL.</td></tr>
+<tr><td><code>pro.hide_attribution</code></td><td>The "Powered by HugoBlox" footer note. Hiding it requires HugoBlox Premium.</td></tr>
+</table>
+</div>
+<p>Anything not covered by these options would mean overriding the template's code, which is beyond normal editing. The template docs are at <a href="https://docs.hugoblox.com/">docs.hugoblox.com</a>.</p>
+
+<!-- ============================================================ -->
+<h2 id="template-leftovers">6. Template leftovers to be aware of</h2>
+<p>Hiding something from the menu doesn't remove it. Every page under <code>content/</code> is built and published, and it's reachable by URL, by the site search, and by search engines. As of now, these template pages are live on your site:</p>
+<ul>
+  <li><b>Blog</b>: 6 template posts (<code>data-visualization</code>, <code>get-started</code>, <code>notebook-onboarding</code>, <code>project-management</code>, <code>second-brain</code>, <code>teach-courses</code>). They are visible because Blog is in the menu.</li>
+  <li><b>Projects</b>: <code>pandas</code>, <code>pytorch</code>, <code>scikit</code>, plus the template title/intro on the Projects page. Also visible via the menu.</li>
+  <li><b>Not in the menu but still published</b>: 3 example publications, the example talk (<code>/events/example/</code>), the example course (<code>/courses/hugo-blox/</code>), the example slide deck (<code>/slides/example/</code>), and <code>/experience/</code> with the <code>TODO</code> entries from <code>me.yaml</code>.</li>
+  <li><b>Other</b>: <code>static/uploads/resume.pdf</code> (check it's your CV), <code>config/_default/params - Kopie.yaml</code> (unused copy), <code>README.md</code> (template text).</li>
+</ul>
+<p>Three ways to take something offline:</p>
+<ol>
+  <li><b>Delete the folder/file</b>. Simplest, and it's still in your git history if you want it back.</li>
+  <li><b>Add <code>draft: true</code></b> to a page's front matter. Drafts are not published.</li>
+  <li><b>Switch off a whole section</b> by adding this to its <code>_index.md</code> front matter. It's the same trick <code>content/authors/_index.md</code> already uses:
+<pre><code>build:
+  render: never
+cascade:
+  build:
+    render: never
+    list: never</code></pre></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2 id="workflow">7. Publishing &amp; previewing</h2>
+<h3>Publishing</h3>
+<ol class="steps">
+  <li>Edit files (in VS Code, or directly on github.com with the pencil icon).</li>
+  <li>Commit and push to the <code>main</code> branch.</li>
+  <li>On GitHub, open the <b>Actions</b> tab. "Deploy website to GitHub Pages" runs. A green check means it's live, usually within a few minutes. Refresh the site with Ctrl+F5 if you still see the old version.</li>
+</ol>
+
+<h3>Previewing before you publish (optional)</h3>
+<p>You can check changes locally before pushing. Hugo isn't installed on this computer yet, so this needs a one-time setup:</p>
+<ol class="steps">
+  <li>Install <b>Hugo extended</b> (version 0.161 or newer, matching <code>hugoblox.yaml</code>), <b>Go</b> (Hugo modules need it), and <b>pnpm</b>. Node.js is already installed.</li>
+  <li>In the repo folder, run <code>pnpm install</code> once.</li>
+  <li>Run <code>hugo server</code> and open <a href="http://localhost:1313">http://localhost:1313</a>. The page reloads every time you save a file. Drafts can be previewed with <code>hugo server -D</code>.</li>
+</ol>
+<p>Alternatives without installing anything: open the repo in a <b>GitHub Codespace</b> (the <code>.devcontainer/</code> folder sets everything up), or use the <b>Ownable</b> VS Code extension the template recommends for visual editing.</p>
+
+<h3>Template updates</h3>
+<p>Every Monday the <code>upgrade.yml</code> workflow checks for a newer HugoBlox version and, if there is one, opens a pull request titled "⬆️ Upgrade HugoBlox Modules". Merging it updates the template. Your content isn't touched, but it's worth glancing at the site afterwards. This also needs the "Allow GitHub Actions to create … pull requests" setting from <a href="#publications">§4</a>.</p>
+
+<!-- ============================================================ -->
+<h2 id="troubleshooting">8. When something breaks</h2>
+<ul>
+  <li><b>Red ✗ in the Actions tab</b>: the build failed and your previous version stays online. Click the failed run → "build" → "Build with Hugo" and read the error. It usually names the file and line.</li>
+  <li><b>Most common cause</b>: YAML indentation, a tab character, or an unquoted <code>:</code> in a title. Compare with a working file.</li>
+  <li><b>Change not showing</b>: check you edited the right file. Remember <code>params - Kopie.yaml</code> does nothing, and the bio lives in <code>me.yaml</code>, not <code>_index.md</code>. Also check that the page doesn't have <code>draft: true</code> and that its <code>date</code> isn't in the future (future-dated pages aren't published).</li>
+  <li><b>Undo</b>: every push is a commit, so you can always revert to an earlier version from the git history.</li>
+</ul>
+
+</main>
+</div>
+</body>
+</html>
