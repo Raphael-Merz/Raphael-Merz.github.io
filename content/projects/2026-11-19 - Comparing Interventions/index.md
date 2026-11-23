@@ -15,8 +15,8 @@ In my first PhD project, I am exploring how comparing the effects of different p
 
 However, this diversity has implications for how experimental findings can be interpreted and generalized. Systematically comparing interventions' outcome effects *and* manipulation strengths can help researchers explain some of the heteorgeneity betweens tudies/interventions, while also informing theories about why certain interventions might show larger effects than others.
 
-I'm currently working on a preprint that lays out these conceptual ideas in more detail, and I hope to share it soon. In the meantime, you can watch a recording of my talk from the Paul Meehl Graduate School Meta-Research Symposium (October 2026) below, or view the slides [here](/uploads/Comparing%20Intervention%20Effects%20-%20PMGS-2026.pdf).
+I'm currently working on a preprint that lays out these conceptual ideas in more detail, and I hope to share it soon. In the meantime, you can watch a recording of my talk from the Paul Meehl Graduate School Meta-Research Symposium (October 2026) below, or view the slides <a href="/uploads/Comparing%20Intervention%20Effects%20-%20PMGS-2026.pdf" target="_blank" rel="noopener">here</a>.
 
-<iframe title="Comparing Intervention Effects to Inform Causal Theorizing - Raphael Merz | Paul Meehl Graduate School Meta Research Symposium 2026" src="https://video.edu.nl/videos/embed/uWa4ncS2Wcjj9tJ5fy7brL" allow="fullscreen" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" style="border: 0px;"></iframe>
+<iframe title="Comparing Intervention Effects to Inform Causal Theorizing - Raphael Merz | Paul Meehl Graduate School Meta Research Symposium 2026" width="711" height="400" src="https://video.edu.nl/videos/embed/uWa4ncS2Wcjj9tJ5fy7brL" allow="fullscreen" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" style="border: 0px;"></iframe>
 
 <!--more-->
