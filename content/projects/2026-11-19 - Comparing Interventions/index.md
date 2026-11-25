@@ -1,6 +1,6 @@
 ---
 title: Comparing Interventions to Inform Causal Theories
-date: 2026-11-19
+date: 2026-11-23
 # links:
 #   - type: site
 #     url: https://github.com/raphael-merz/tbd
